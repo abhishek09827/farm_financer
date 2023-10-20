@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "648981381198",
+    "project_id": "farmfinancer",
+    "storage_bucket": "farmfinancer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648981381198:android:774021736052655d18431f",
+        "android_client_info": {
+          "package_name": "com.reva.farmFinance"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6jAcM6qJa_VaGbAIKfNDtAYDP7_NiZsA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
