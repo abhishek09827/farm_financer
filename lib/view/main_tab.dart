@@ -1,3 +1,4 @@
+import 'package:farm_financer/screens/resources.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,10 +6,9 @@ import '../../common/color_extension.dart';
 import '../screens/add_subs.dart';
 import '../screens/home_view.dart';
 
-
 class MainTabView extends StatefulWidget {
   int? savings = 0;
-  MainTabView({this.savings,super.key});
+  MainTabView({this.savings, super.key});
 
   @override
   State<MainTabView> createState() => _MainTabViewState();
@@ -17,7 +17,6 @@ class MainTabView extends StatefulWidget {
 class _MainTabViewState extends State<MainTabView> {
   int selectTab = 0;
   // PageStorageBucket pageStorageBucket = PageStorageBucket();
-
 
   @override
   void initState() {
@@ -31,10 +30,12 @@ class _MainTabViewState extends State<MainTabView> {
     Widget child = HomeView();
     switch (selectTab) {
       case 0:
-        child = HomeView(savings: widget.savings,);
+        child = HomeView(
+          savings: widget.savings,
+        );
         break;
       case 1:
-        child = HomeView();
+        child = ResourcesPage();
         break;
       case 2:
         child = HomeView();
@@ -50,7 +51,7 @@ class _MainTabViewState extends State<MainTabView> {
               const Spacer(),
               Padding(
                 padding:
-                const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
                 child: Stack(
                   alignment: Alignment.bottomCenter,
                   children: [
@@ -62,48 +63,59 @@ class _MainTabViewState extends State<MainTabView> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  selectTab = 0;
-                                });
-                              },
-                              icon: Icon(CupertinoIcons.house,color: Colors.white,)
-                            ),
+                                onPressed: () {
+                                  setState(() {
+                                    selectTab = 0;
+                                  });
+                                },
+                                icon: Icon(
+                                  CupertinoIcons.house,
+                                  color: Colors.white,
+                                )),
                             IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  selectTab = 1;
-                                });
-                              },
-                              icon: Icon(CupertinoIcons.chat_bubble_2_fill,color: Colors.white,)
-                            ),
+                                onPressed: () {
+                                  setState(() {
+                                    selectTab = 1;
+                                  });
+                                },
+                                icon: Icon(
+                                  CupertinoIcons.chat_bubble_2_fill,
+                                  color: Colors.white,
+                                )),
                             const SizedBox(
                               width: 50,
                               height: 50,
                             ),
                             IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  selectTab = 2;
-                                });
-                              },
-                              icon: Icon(CupertinoIcons.bubble_middle_bottom_fill,color: Colors.white,)
-                            ),
+                                onPressed: () {
+                                  setState(() {
+                                    selectTab = 2;
+                                  });
+                                },
+                                icon: Icon(
+                                  CupertinoIcons.bubble_middle_bottom_fill,
+                                  color: Colors.white,
+                                )),
                             IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  selectTab = 3;
-                                });
-                              },
-                              icon: Icon(CupertinoIcons.profile_circled,color: Colors.white,)
-                            ),
+                                onPressed: () {
+                                  setState(() {
+                                    selectTab = 3;
+                                  });
+                                },
+                                icon: Icon(
+                                  CupertinoIcons.profile_circled,
+                                  color: Colors.white,
+                                )),
                           ],
                         )
                       ],
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const AddSubs()) );
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AddSubs()));
                       },
                       child: Container(
                         margin: const EdgeInsets.all(20),
