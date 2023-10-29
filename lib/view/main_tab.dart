@@ -1,3 +1,4 @@
+import 'package:farm_financer/screens/chat_bot.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,12 +37,12 @@ class _MainTabViewState extends State<MainTabView> {
       case 1:
         child = HomeView();
         break;
+
       case 2:
-        child = HomeView();
+        child = ChatBot();
         break;
     }
     return Scaffold(
-      backgroundColor: TColor.gray,
       body: Stack(children: [
         child,
         SafeArea(

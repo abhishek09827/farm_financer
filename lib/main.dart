@@ -1,4 +1,7 @@
 import 'package:farm_financer/login/welcome_screen.dart';
+import 'package:farm_financer/screens/budget.dart';
+import 'package:farm_financer/screens/budget_graph.dart';
+import 'package:farm_financer/screens/chat_bot.dart';
 import 'package:farm_financer/screens/home_view.dart';
 import 'package:farm_financer/view/main_tab.dart';
 import 'package:firebase_core/firebase_core.dart';
