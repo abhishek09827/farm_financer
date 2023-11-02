@@ -1,8 +1,33 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class CreatePostScreen extends StatelessWidget {
+import 'package:farm_financer/controllers/post_controller.dart';
+import 'package:farm_financer/models/post.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+class CreatePostScreen extends StatefulWidget {
   CreatePostScreen({super.key});
+
+  @override
+  State<CreatePostScreen> createState() => _CreatePostScreenState();
+}
+
+class _CreatePostScreenState extends State<CreatePostScreen> {
+  User? users = FirebaseAuth.instance.currentUser;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    image = null;
+    print(users.toString());
+  }
+
   TextEditingController captionController = TextEditingController();
+
+  ImagePicker picker = ImagePicker();
+
+  File? image;
 
   @override
   Widget build(BuildContext context) {
@@ -14,19 +39,39 @@ class CreatePostScreen extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            Container(
-              height: 200,
-              width: 300,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.file_upload_outlined),
-                    Text("Browse Files")
-                  ]),
-              decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  border: Border.all(color: Colors.black, width: 1),
-                  borderRadius: BorderRadius.circular(12)),
+            GestureDetector(
+              onTap: () async {
+                final pickedFile =
+                    await picker.pickImage(source: ImageSource.gallery);
+                setState(() {
+                  if (pickedFile != null) {
+                    image = File(pickedFile.path);
+                    // uploadFile();
+                  } else {
+                    print('No image selected.');
+                  }
+                });
+                print(image);
+              },
+              child: Container(
+                height: 200,
+                width: 300,
+                child: image != null
+                    ? Image.file(
+                        File(image!.path),
+                        fit: BoxFit.cover,
+                      )
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                            Icon(Icons.file_upload_outlined),
+                            Text("Browse Files")
+                          ]),
+                decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    border: Border.all(color: Colors.black, width: 1),
+                    borderRadius: BorderRadius.circular(12)),
+              ),
             ),
             TextFormField(
                 autofocus: false,
@@ -84,7 +129,24 @@ class CreatePostScreen extends StatelessWidget {
                     color: Colors.black,
                     fontWeight: FontWeight.w700,
                     fontSize: 14)),
-            ElevatedButton(onPressed: () {}, child: Text("Post"))
+            ElevatedButton(
+                onPressed: () async {
+                  print("sfdfdf");
+                  String? imageURL = await PostController().uploadFile(image);
+                  if (imageURL == null) {
+                    print("could not upload image ");
+                    return;
+                  }
+                  print("sfdfdf");
+                  CommunityPost post = CommunityPost(
+                      userID: users!.uid!,
+                      photoUrl: imageURL,
+                      caption: captionController.text,
+                      dateTime: DateTime.now(),
+                      likes: 0);
+                  PostController().addPost(users, post);
+                },
+                child: Text("Post"))
           ],
         ),
       ),

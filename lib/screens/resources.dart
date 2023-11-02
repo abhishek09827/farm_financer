@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:farm_financer/models/post.dart';
 import 'package:farm_financer/screens/community.dart';
+import 'package:farm_financer/screens/create_post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -23,7 +26,7 @@ class ResourcesPage extends StatelessWidget {
                   children: [
                     IconButton(
                         onPressed: () {
-                          Navigator.pushReplacement(
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => CommunityPostPage()),
@@ -40,7 +43,15 @@ class ResourcesPage extends StatelessWidget {
                 height: 100,
                 child: Column(
                   children: [
-                    Icon(Icons.add),
+                    IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CreatePostScreen()),
+                          );
+                        },
+                        icon: Icon(Icons.add)),
                     Text("Create Post"),
                   ],
                 ),

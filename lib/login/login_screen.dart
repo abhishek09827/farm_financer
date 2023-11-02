@@ -7,7 +7,6 @@ import 'package:velocity_x/velocity_x.dart';
 import '../../common/color_extension.dart';
 import '../common/primary_button.dart';
 
-
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
 
@@ -41,9 +40,7 @@ class _SignInViewState extends State<SignInView> {
               const Spacer(),
               VxTextField(
                 hint: "Login",
-                hintStyle: TextStyle(
-                  color: Vx.gray600
-                ),
+                hintStyle: TextStyle(color: Vx.gray600),
                 controller: txtEmail,
                 keyboardType: TextInputType.emailAddress,
               ),
@@ -51,9 +48,7 @@ class _SignInViewState extends State<SignInView> {
                 height: 15,
               ),
               VxTextField(
-                hintStyle: TextStyle(
-                    color: Vx.gray600
-                ),
+                hintStyle: TextStyle(color: Vx.gray600),
                 hint: "Password",
                 controller: txtPassword,
                 obscureText: true,
@@ -107,8 +102,8 @@ class _SignInViewState extends State<SignInView> {
               ),
 
               PrimaryButton(
-              color: Colors.deepOrangeAccent,
-                  color2: Colors.orangeAccent,
+                color: Colors.deepOrangeAccent,
+                color2: Colors.orangeAccent,
                 title: "Sign In",
                 onPressed: logInToFb,
               ),
@@ -122,12 +117,10 @@ class _SignInViewState extends State<SignInView> {
                 height: 20,
               ),
               PrimaryButton(
-                  color: Colors.deepOrangeAccent,
-                  color2: Colors.black38,
+                color: Colors.deepOrangeAccent,
+                color2: Colors.black38,
                 title: "Sign up",
-                onPressed: () {
-
-                },
+                onPressed: () {},
               ),
             ],
           ),
@@ -135,12 +128,13 @@ class _SignInViewState extends State<SignInView> {
       ),
     );
   }
+
   void logInToFb() {
     firebaseAuth
         .signInWithEmailAndPassword(
-        email: txtEmail.text, password: txtPassword.text)
+            email: txtEmail.text, password: txtPassword.text)
         .then((result) {
-      Navigator.pushReplacement(
+      Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => MainTabView()),
       );

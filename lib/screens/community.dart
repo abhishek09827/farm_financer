@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_financer/models/post.dart';
 import 'package:farm_financer/models/user_reviews.dart';
 import 'package:farm_financer/screens/create_post.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -10,6 +12,7 @@ class CommunityPostPage extends StatelessWidget {
 
   List<CommunityPost> listofCommunityPost = [
     CommunityPost(
+        userID: "3we2",
         username: "sarah12",
         url:
             "https://5.imimg.com/data5/SELLER/Default/2022/5/ZY/NG/JQ/55572448/mahindra-jivo-245-di-4wd-tractor-500x500.jpeg",
@@ -19,6 +22,7 @@ class CommunityPostPage extends StatelessWidget {
         dateTime: DateTime.now(),
         likes: 23),
     CommunityPost(
+        userID: "cnbsacih",
         username: "sarah12",
         url:
             "https://5.imimg.com/data5/SELLER/Default/2022/5/ZY/NG/JQ/55572448/mahindra-jivo-245-di-4wd-tractor-500x500.jpeg",
@@ -36,6 +40,28 @@ class CommunityPostPage extends StatelessWidget {
         photoURL:
             "https://5.imimg.com/data5/SELLER/Default/2022/5/ZY/NG/JQ/55572448/mahindra-jivo-245-di-4wd-tractor-500x500.jpeg")
   ];
+
+  Future<List<CommunityPost>> fetchResources() async {
+    print("fetch 1");
+    List<CommunityPost> comm = [];
+    print("fetch 2");
+    final docUser =
+        await FirebaseFirestore.instance.collection("resources").get();
+    print(docUser.docs);
+    print("fetch 3");
+    for (var element in docUser.docs) {
+      comm.add(CommunityPost.fromMap(element.data()!));
+    }
+
+    print("fetch 4");
+    print(comm);
+    return comm;
+    // final snapshot = await docUser.;
+    // if (snapshot.exists) {
+    //   return snapshot.data();
+    // }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +70,7 @@ class CommunityPostPage extends StatelessWidget {
         actions: [
           ElevatedButton(
               onPressed: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => CreatePostScreen()),
                 );
@@ -52,31 +78,31 @@ class CommunityPostPage extends StatelessWidget {
               child: Text("Create Post"))
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ListView.builder(
+      body: FutureBuilder(
+          future: fetchResources(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            }
+            return ListView.builder(
                 shrinkWrap: true,
-                // scrollDirection: Axis.vertical,
-                itemCount: listofCommunityPost.length,
+                scrollDirection: Axis.vertical,
+                itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
-                  return PostWidget(post: listofCommunityPost[index]);
-                }),
-            Text("User Reviews"),
-            // ListView.builder(
-            //     shrinkWrap: true,
-            //     scrollDirection: Axis.horizontal,
-            //     itemCount: listOfUserReviews.length,
-            //     itemBuilder: (context, index) {
-            //       return UserReviewWidget(userReview: listOfUserReviews[index]);
-            //     }),
-          ],
-        ),
-      ),
+                  return PostWidget(post: snapshot.data![index]);
+                });
+          }),
     );
   }
 }
 
+// ListView.builder(
+//     shrinkWrap: true,
+//     scrollDirection: Axis.horizontal,
+//     itemCount: listOfUserReviews.length,
+//     itemBuilder: (context, index) {
+//       return UserReviewWidget(userReview: listOfUserReviews[index]);
+//     }),
 class UserReviewWidget extends StatelessWidget {
   const UserReviewWidget({
     super.key,
@@ -133,11 +159,12 @@ class PostWidget extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
-            title: Text(post.username),
+            title: Text(post.username ?? "unknown"),
             subtitle: Text(post.dateTime.toString()),
             leading: CircleAvatar(foregroundImage: NetworkImage(post.photoUrl)),
           ),
-          Image.network(post.url),
+          Image.network(post.photoUrl),
+          CircleAvatar(),
           Text(post.caption),
           Row(
             children: [
