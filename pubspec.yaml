@@ -47,6 +47,8 @@ dependencies:
   webview_flutter: ^4.4.1
   http: ^1.1.0
   fl_chart: ^0.40.0
+  flutter_chat_ui: ^1.6.9
+  uuid: ^4.1.0
 
 dev_dependencies:
   flutter_test:

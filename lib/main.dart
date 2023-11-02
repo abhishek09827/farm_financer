@@ -1,12 +1,9 @@
 import 'package:farm_financer/login/welcome_screen.dart';
-import 'package:farm_financer/screens/budget.dart';
-import 'package:farm_financer/screens/budget_graph.dart';
 import 'package:farm_financer/screens/chat_bot.dart';
+import 'package:farm_financer/screens/chat_page.dart';
 import 'package:farm_financer/screens/home_view.dart';
-import 'package:farm_financer/view/main_tab.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'common/color_extension.dart';
 import 'firebase_options.dart';
 
@@ -25,12 +22,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Trackizer',
+      title: 'Farm Financier',
       debugShowCheckedModeBanner: false,
-
       theme: ThemeData(
         fontFamily: "Inter",
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
             titleMedium: TextStyle(
               color: Colors.white
             )
@@ -44,7 +40,6 @@ class MyApp extends StatelessWidget {
           secondary: TColor.secondary,
 
         ),
-        useMaterial3: false,
       ),
       home: WelcomeScreen(),
     );

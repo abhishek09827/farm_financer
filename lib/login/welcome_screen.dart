@@ -15,7 +15,6 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.sizeOf(context);
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -23,8 +22,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: [
             Image.asset(
               "assets/images/wp5097914.jpg",
-              width: media.width,
-              height: media.height,
+              width: MediaQuery.sizeOf(context).width,
+              height: MediaQuery.sizeOf(context).height,
             fit: BoxFit.cover,),
             SafeArea(
                 child: Column(
@@ -32,8 +31,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   children: [
                     Image.asset(
                         "assets/images/farm_logo.png",
-                        width: media.width * 0.5,
-                        height: media.height * 0.5),
+                        width: MediaQuery.sizeOf(context).width * 0.5,
+                        height: MediaQuery.sizeOf(context).height * 0.5),
                     Container(
                       child: Column(
                         children: [

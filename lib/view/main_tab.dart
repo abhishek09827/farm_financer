@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../common/color_extension.dart';
 import '../screens/add_subs.dart';
+import '../screens/chat_page.dart';
 import '../screens/home_view.dart';
 
 
@@ -32,14 +33,14 @@ class _MainTabViewState extends State<MainTabView> {
     Widget child = HomeView();
     switch (selectTab) {
       case 0:
-        child = HomeView(savings: widget.savings,);
+        child = HomeView();
         break;
       case 1:
-        child = HomeView();
+        child = ChatBot();
         break;
 
       case 2:
-        child = ChatBot();
+        child = ChatPage();
         break;
     }
     return Scaffold(
