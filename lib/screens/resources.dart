@@ -1,3 +1,4 @@
+import 'package:farm_financer/screens/community.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -20,7 +21,15 @@ class ResourcesPage extends StatelessWidget {
                 height: 100,
                 child: Column(
                   children: [
-                    Icon(Icons.add),
+                    IconButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CommunityPostPage()),
+                          );
+                        },
+                        icon: Icon(Icons.add)),
                     Text("Community"),
                   ],
                 ),
@@ -32,7 +41,7 @@ class ResourcesPage extends StatelessWidget {
                 child: Column(
                   children: [
                     Icon(Icons.add),
-                    Text("Community"),
+                    Text("Create Post"),
                   ],
                 ),
                 alignment: Alignment.center,
