@@ -30,8 +30,17 @@ class _MainTabViewState extends State<MainTabView> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
   }
 
+  void _launchURL(url) async {
+    // await canLaunch(url) ? await launch(url) : throw 'Could not launch $_url';
+    try {
+      await launch(url, forceSafariVC: true, forceWebView: true,enableJavaScript: true);
+    } catch (e) {
+      // print(e);
+    }
+  }
+
   Future<void> _launchInWebView(Uri url) async {
-    if (!await launchUrl(url, mode: LaunchMode.externalNonBrowserApplication)) {
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       throw Exception('Could not launch $url');
     }
   }
@@ -109,10 +118,10 @@ class _MainTabViewState extends State<MainTabView> {
                                   // ));
 
                                   print("Sd");
-                                  _launchInWebView(Uri(
-                                      host:
-                                          "www.chatbot-kissan.streamlit.app",
-                                      scheme: "https"));
+                                  _launchURL("https://chatbot-kissan.streamlit.app");
+                                  // _launchInWebView(Uri(
+                                  //     host: "chatbot-kissan.streamlit.app",
+                                  //     scheme: "https"));
                                 },
                                 icon: Icon(
                                   CupertinoIcons.bubble_middle_bottom_fill,
