@@ -1,4 +1,9 @@
 import 'package:farm_financer/login/welcome_screen.dart';
+import 'package:farm_financer/screens/community.dart';
+import 'package:farm_financer/screens/home_view.dart';
+import 'package:farm_financer/screens/resources.dart';
+import 'package:farm_financer/util/constants.dart';
+import 'package:farm_financer/view/main_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -8,15 +13,15 @@ import 'firebase_options.dart';
 import 'locale_constant.dart';
 import 'localisation_delegate.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MyApp());
 }
-class MyApp extends StatefulWidget {
 
+class MyApp extends StatefulWidget {
   static void setLocale(BuildContext context, Locale newLocale) {
     var state = context.findAncestorStateOfType<_MyAppState>();
     state!.setLocale(newLocale);
@@ -25,6 +30,7 @@ class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _MyAppState();
 }
+
 class _MyAppState extends State<MyApp> {
   Locale _locale = Locale('hi');
 
@@ -52,26 +58,18 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: "Inter",
-        textTheme: const TextTheme(
-            titleMedium: TextStyle(
-              color: Colors.white
-            )
-        ),
-
+        textTheme: TextTheme(titleMedium: TextStyle(color: AppColor.white)),
         colorScheme: ColorScheme.fromSeed(
           seedColor: TColor.primary,
           background: TColor.gray80,
           primary: TColor.primary,
           primaryContainer: TColor.gray60,
           secondary: TColor.secondary,
-
         ),
       ),
       home: WelcomeScreen(),
-      locale: _locale,supportedLocales: [
-      Locale('en', ''),
-      Locale('hi', '')
-    ],
+      locale: _locale,
+      supportedLocales: [Locale('en', ''), Locale('hi', '')],
       localizationsDelegates: [
         AppLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
@@ -90,5 +88,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-

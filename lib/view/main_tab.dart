@@ -1,3 +1,5 @@
+import 'package:farm_financer/screens/community.dart';
+import 'package:farm_financer/screens/resources.dart';
 import 'package:farm_financer/screens/chat_bot.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,11 +9,11 @@ import '../screens/add_subs.dart';
 import '../screens/chat_page.dart';
 import '../screens/home_view.dart';
 import '../widgets/settings.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 
 class MainTabView extends StatefulWidget {
   int? savings = 0;
-  MainTabView({this.savings,super.key});
+  MainTabView({this.savings, super.key});
 
   @override
   State<MainTabView> createState() => _MainTabViewState();
@@ -21,12 +23,26 @@ class _MainTabViewState extends State<MainTabView> {
   int selectTab = 0;
   // PageStorageBucket pageStorageBucket = PageStorageBucket();
 
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+  }
+
+  void _launchURL(url) async {
+    // await canLaunch(url) ? await launch(url) : throw 'Could not launch $_url';
+    try {
+      await launch(url, forceSafariVC: true, forceWebView: true,enableJavaScript: true);
+    } catch (e) {
+      // print(e);
+    }
+  }
+
+  Future<void> _launchInWebView(Uri url) async {
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   @override
@@ -37,7 +53,7 @@ class _MainTabViewState extends State<MainTabView> {
         child = HomeView();
         break;
       case 1:
-        child = ChatBot();
+        child = CommunityPostPage();
         break;
 
       case 2:
@@ -57,7 +73,7 @@ class _MainTabViewState extends State<MainTabView> {
               const Spacer(),
               Padding(
                 padding:
-                const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
                 child: Stack(
                   alignment: Alignment.bottomCenter,
                   children: [
@@ -69,48 +85,68 @@ class _MainTabViewState extends State<MainTabView> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  selectTab = 0;
-                                });
-                              },
-                              icon: Icon(CupertinoIcons.house,color: Colors.white,)
-                            ),
+                                onPressed: () {
+                                  setState(() {
+                                    selectTab = 0;
+                                  });
+                                },
+                                icon: Icon(
+                                  CupertinoIcons.house,
+                                  color: Colors.white,
+                                )),
                             IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  selectTab = 1;
-                                });
-                              },
-                              icon: Icon(CupertinoIcons.chat_bubble_2_fill,color: Colors.white,)
-                            ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            CommunityPostPage()),
+                                  );
+                                },
+                                icon: Icon(
+                                  CupertinoIcons.chat_bubble_2_fill,
+                                  color: Colors.white,
+                                )),
                             const SizedBox(
                               width: 50,
                               height: 50,
                             ),
                             IconButton(
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => ChatPage(),
-                                ));
-                              },
-                              icon: Icon(CupertinoIcons.bubble_middle_bottom_fill,color: Colors.white,)
-                            ),
+                                onPressed: () {
+                                  // Navigator.push(context, MaterialPageRoute(
+                                  //   builder: (context) => ChatPage(),
+                                  // ));
+
+                                  print("Sd");
+                                  _launchURL("https://chatbot-kissan.streamlit.app");
+                                  // _launchInWebView(Uri(
+                                  //     host: "chatbot-kissan.streamlit.app",
+                                  //     scheme: "https"));
+                                },
+                                icon: Icon(
+                                  CupertinoIcons.bubble_middle_bottom_fill,
+                                  color: Colors.white,
+                                )),
                             IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  selectTab = 3;
-                                });
-                              },
-                              icon: Icon(CupertinoIcons.profile_circled,color: Colors.white,)
-                            ),
+                                onPressed: () {
+                                  setState(() {
+                                    selectTab = 3;
+                                  });
+                                },
+                                icon: Icon(
+                                  CupertinoIcons.profile_circled,
+                                  color: Colors.white,
+                                )),
                           ],
                         )
                       ],
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const AddSubs()) );
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AddSubs()));
                       },
                       child: Container(
                         margin: const EdgeInsets.all(20),
