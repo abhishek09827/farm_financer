@@ -4,7 +4,8 @@
 
 
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Farm Finance"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
