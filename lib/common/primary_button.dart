@@ -13,7 +13,7 @@ class PrimaryButton extends StatelessWidget {
     var media = MediaQuery.sizeOf(context);
     return ElevatedButton(
         style: ButtonStyle(
-            elevation: MaterialStateProperty.all(25),
+            elevation: MaterialStateProperty.all(5),
             shadowColor: MaterialStateProperty.all(color2),
 
             shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
