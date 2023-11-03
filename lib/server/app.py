@@ -7,7 +7,7 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain.llms import OpenAI
 
 app = Flask(__name__)
-OPENAI_API_KEY="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"
+OPENAI_API_KEY="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"
 
 def pdf_content(pdf_docss):
     text = ""
@@ -28,7 +28,7 @@ def process_pdf(pdf_content):
     chunks = text_splitter.split_text(pdf_content)
 
     # Creating embeddings
-    embeddings = OpenAIEmbeddings(openai_api_key="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")
+    embeddings = OpenAIEmbeddings(openai_api_key="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")
     knowledge_base = FAISS.from_texts(chunks, embeddings)
 
     return knowledge_base
