@@ -8,6 +8,7 @@ import '../../common/color_extension.dart';
 import '../screens/add_subs.dart';
 import '../screens/chat_page.dart';
 import '../screens/home_view.dart';
+import '../screens/tts/tts.dart';
 import '../widgets/settings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -33,7 +34,8 @@ class _MainTabViewState extends State<MainTabView> {
   void _launchURL(url) async {
     // await canLaunch(url) ? await launch(url) : throw 'Could not launch $_url';
     try {
-      await launch(url, forceSafariVC: true, forceWebView: true,enableJavaScript: true);
+      await launch(url,
+          forceSafariVC: true, forceWebView: true, enableJavaScript: true);
     } catch (e) {
       // print(e);
     }
@@ -113,12 +115,14 @@ class _MainTabViewState extends State<MainTabView> {
                             ),
                             IconButton(
                                 onPressed: () {
-                                  // Navigator.push(context, MaterialPageRoute(
-                                  //   builder: (context) => ChatPage(),
-                                  // ));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ChatPage(),
+                                      ));
 
-                                  print("Sd");
-                                  _launchURL("https://chatbot-kissan.streamlit.app");
+                                  // print("Sd");
+                                  // _launchURL("https://chatbot-kissan.streamlit.app");
                                   // _launchInWebView(Uri(
                                   //     host: "chatbot-kissan.streamlit.app",
                                   //     scheme: "https"));
