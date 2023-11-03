@@ -38,6 +38,7 @@ class _ChatPageState extends State<ChatPage> {
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
+      print(data['response']);
       setState(() {
         _response = data['response'] ?? 'No response from server';
       });
@@ -63,7 +64,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
 
-  void _handleSendPressed(types.PartialText message) {
+  void _handleSendPressed(types.PartialText message) async{
     final textMessage = types.TextMessage(
       author: _user,
       createdAt: DateTime.now().millisecondsSinceEpoch,
@@ -72,9 +73,10 @@ class _ChatPageState extends State<ChatPage> {
     );
 
     _addMessage(textMessage);
-    _askQuestion(_questionController.text);
+    await _askQuestion(message.text);
     final textMessage2 = types.TextMessage(
       author: _user2,
+
       createdAt: DateTime.now().millisecondsSinceEpoch,
       id: const Uuid().v4(),
       text: _response,
