@@ -89,9 +89,22 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
     body: SafeArea(
-      child: Padding( 
-        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 75),
-        child: Chat(
+      child: Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+      backgroundColor: Colors.deepOrangeAccent,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        ),
+        title: Text("Financer Bot"),
+      ),
+        body: Chat(
+          theme: DefaultChatTheme(
+            backgroundColor: Colors.black
+          ),
           messages: _messages,
           onSendPressed: _handleSendPressed,
           showUserAvatars: true,
