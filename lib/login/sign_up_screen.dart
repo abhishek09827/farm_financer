@@ -24,6 +24,7 @@ class _SignUpViewState extends State<SignUpView> {
   TextEditingController txtEmail = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
   TextEditingController txtSavings = TextEditingController();
+  TextEditingController score = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -116,6 +117,14 @@ class _SignUpViewState extends State<SignUpView> {
               const SizedBox(
                 height: 20,
               ),
+              RoundTextField(
+                title: "score",
+                controller: score,
+                obscureText: true,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               PrimaryButton(
                 title: "Get started, it's free!",
                 onPressed: () async{
@@ -123,7 +132,8 @@ class _SignUpViewState extends State<SignUpView> {
                       email: txtEmail.text,
                       paswd: txtPassword.text,
                       dateJoined: DateTime.now(),
-                      savings: int.parse(txtSavings.text)
+                      savings: int.parse(txtSavings.text),
+                    score: double.parse(score.text),
                   );
                   Navigator.push(
                     context,
@@ -162,7 +172,7 @@ class _SignUpViewState extends State<SignUpView> {
       ),
     );
   }
-  Future createUser ({required String email,required String paswd ,required DateTime dateJoined, required int savings,})async{
+  Future createUser ({required String email,required String paswd, required double score,required DateTime dateJoined, required int savings,})async{
 
     final user = await firebaseAuth.createUserWithEmailAndPassword(email: email, password: paswd);
     print(user.user!.uid);
@@ -171,7 +181,8 @@ class _SignUpViewState extends State<SignUpView> {
         email: email,
         paswd: paswd ,
         dateJoined: dateJoined,
-        savings:savings
+        savings:savings,
+        score: score,
     );
     final json = users.toMap();
     await FirebaseFirestore.instance.collection('users').doc(user.user!.uid).set(json);

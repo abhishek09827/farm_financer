@@ -207,7 +207,9 @@ class PostWidget extends StatelessWidget {
                   
                 ),
                 Image(
-                  image: NetworkImage(
+                  image:post.photoUrl!.isEmpty ? NetworkImage(
+                    "https://images.pexels.com/photos/1413097/pexels-photo-1413097.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+                  ) : NetworkImage(
                     post.photoUrl!,
                   ),
                   height: 75,

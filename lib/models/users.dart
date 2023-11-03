@@ -6,6 +6,7 @@ class UserModel {
   final String? profilePic;
   final DateTime dateJoined;
   final int savings;
+  final double score;
 
   UserModel({
     required this.uid,
@@ -15,6 +16,7 @@ class UserModel {
     required this.dateJoined,
     required this.savings,
     required this.paswd,
+    required this.score,
   });
 
   Map<String, dynamic> toMap() {
@@ -25,7 +27,8 @@ class UserModel {
       'profilePic': profilePic,
       'dateJoined': dateJoined,
       'savings' : savings,
-      'paswd' : paswd
+      'paswd' : paswd,
+      'score' : score
     };
   }
 
@@ -38,6 +41,7 @@ class UserModel {
       dateJoined: map?['dateJoined'],
       savings: map?['savings'],
       paswd: map?['paswd'],
+      score: map?['score'],
     );
   }
 }

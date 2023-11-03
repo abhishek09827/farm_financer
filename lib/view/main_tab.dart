@@ -113,13 +113,13 @@ class _MainTabViewState extends State<MainTabView> {
                             ),
                             IconButton(
                                 onPressed: () {
-                                  // Navigator.push(context, MaterialPageRoute(
-                                  //   builder: (context) => ChatPage(),
-                                  // ));
+                                  Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) => ChatPage(),
+                                  ));
 
-                                  print("Sd");
-                                  _launchURL("https://chatbot-kissan.streamlit.app");
-                                  // _launchInWebView(Uri(
+                                  // print("Sd");
+                                  // _launchURL("https://chatbot-kissan.streamlit.app");
+                                  // // _launchInWebView(Uri(
                                   //     host: "chatbot-kissan.streamlit.app",
                                   //     scheme: "https"));
                                 },
