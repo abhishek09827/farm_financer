@@ -187,7 +187,7 @@ class PostWidget extends StatelessWidget {
             height: 400,
             // width: MediaQuery.sizeOf(context).width * 0.75,
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.white10),
+                border: Border.all(color: Colors.white24),
                 borderRadius: BorderRadius.circular(12)),
             child: Column(
               children: [
@@ -203,28 +203,26 @@ class PostWidget extends StatelessWidget {
                   leading: CircleAvatar(
                       foregroundImage: NetworkImage(post.photoUrl!)),
                 ),
-                Card(
-                  
-                ),
                 Image(
                   image: NetworkImage(
                     post.photoUrl!,
                   ),
-                  height: 75,
+                  height: 230,
+                  width: MediaQuery.of(context).size.width * .75,
                   // frameBuilder:
                   //     (context, child, frame, wasSynchronouslyLoaded) {
                   //   return Image.asset("assets/images/wp5097914.jpg");
                   // },
                   fit: BoxFit.fill,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    // return Image.asset(
-                    //   "assets/images/wp5097914.jpg",
-                    //   height: 250,
-                    //   width: MediaQuery.sizeOf(context).width * .8,
-                    //   fit: BoxFit.fill,
-                    // );
-                    return CircularProgressIndicator();
-                  },
+                  // loadingBuilder: (context, child, loadingProgress) {
+                  // return Image.asset(
+                  //   "assets/images/wp5097914.jpg",
+                  //   height: 250,
+                  //   width: MediaQuery.sizeOf(context).width * .8,
+                  //   fit: BoxFit.fill,
+                  // );
+                  //   return CircularProgressIndicator();
+                  // },
                 ),
                 SizedBox(
                   height: 10,
@@ -233,16 +231,33 @@ class PostWidget extends StatelessWidget {
                   post.caption!,
                   style: TextStyle(color: AppColor.white),
                 ),
-                Row(
-                  children: [
-                    Column(
-                      children: [
-                        IconButton(onPressed: () {}, icon: Icon(Icons.chat)),
-                        // Text(post.likes.toString()),
-                      ],
-                    )
-                  ],
-                )
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: AppColor.deepOrangeAccent),
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.all(2),
+                  child: Text(
+                    "₹ 123435",
+                    style: TextStyle(fontSize: 25, color: Colors.white),
+                  ),
+                  height: 40,
+                  width: MediaQuery.of(context).size.width * .75,
+                ),
+                // ElevatedButton(onPressed: () {}, child: Text("2435"))
+                // Row(
+                //   children: [
+                //     Column(
+                //       children: [
+                //         IconButton(onPressed: () {}, icon: Icon(Icons.chat)),
+                //         // Text(post.likes.toString()),
+                //       ],
+                //     )
+                //   ],
+                // ),
               ],
             ),
           ),
