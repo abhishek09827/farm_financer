@@ -10,28 +10,28 @@ import 'package:flutter/rendering.dart';
 class CommunityPostPage extends StatelessWidget {
   CommunityPostPage({super.key});
 
-  List<CommunityPost> listofCommunityPost = [
-    CommunityPost(
-        userID: "3we2",
-        username: "sarah12",
-        url:
-            "https://5.imimg.com/data5/SELLER/Default/2022/5/ZY/NG/JQ/55572448/mahindra-jivo-245-di-4wd-tractor-500x500.jpeg",
-        photoUrl:
-            "https://5.imimg.com/data5/SELLER/Default/2022/5/ZY/NG/JQ/55572448/mahindra-jivo-245-di-4wd-tractor-500x500.jpeg",
-        caption: "Hello from India",
-        dateTime: DateTime.now(),
-        likes: 23),
-    CommunityPost(
-        userID: "cnbsacih",
-        username: "sarah12",
-        url:
-            "https://5.imimg.com/data5/SELLER/Default/2022/5/ZY/NG/JQ/55572448/mahindra-jivo-245-di-4wd-tractor-500x500.jpeg",
-        photoUrl:
-            "https://5.imimg.com/data5/SELLER/Default/2022/5/ZY/NG/JQ/55572448/mahindra-jivo-245-di-4wd-tractor-500x500.jpeg",
-        caption: "Hello from India",
-        dateTime: DateTime.now(),
-        likes: 23),
-  ];
+  // List<CommunityPost> listofCommunityPost = [
+  //   CommunityPost(
+  //       userID: "3we2",
+  //       username: "sarah12",
+  //       url:
+  //           "https://5.imimg.com/data5/SELLER/Default/2022/5/ZY/NG/JQ/55572448/mahindra-jivo-245-di-4wd-tractor-500x500.jpeg",
+  //       photoUrl:
+  //           "https://5.imimg.com/data5/SELLER/Default/2022/5/ZY/NG/JQ/55572448/mahindra-jivo-245-di-4wd-tractor-500x500.jpeg",
+  //       caption: "Hello from India",
+  //       dateTime: DateTime.now(),
+  //       likes: 23),
+  //   CommunityPost(
+  //       userID: "cnbsacih",
+  //       username: "sarah12",
+  //       url:
+  //           "https://5.imimg.com/data5/SELLER/Default/2022/5/ZY/NG/JQ/55572448/mahindra-jivo-245-di-4wd-tractor-500x500.jpeg",
+  //       photoUrl:
+  //           "https://5.imimg.com/data5/SELLER/Default/2022/5/ZY/NG/JQ/55572448/mahindra-jivo-245-di-4wd-tractor-500x500.jpeg",
+  //       caption: "Hello from India",
+  //       dateTime: DateTime.now(),
+  //       likes: 23),
+  // ];
   List<UserReviews> listOfUserReviews = [
     UserReviews(
         username: "sarah12",
@@ -155,29 +155,67 @@ class PostWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          ListTile(
-            title: Text(post.username ?? "unknown"),
-            subtitle: Text(post.dateTime.toString()),
-            leading: CircleAvatar(foregroundImage: NetworkImage(post.photoUrl)),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 8, 15, 8),
+          child: Container(
+            height: 400,
+            // width: MediaQuery.sizeOf(context).width * 0.75,
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.green),
+                borderRadius: BorderRadius.circular(12)),
+            child: Column(
+              children: [
+                ListTile(
+                  title: Text(
+                    post.username ?? "unknown",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  subtitle: Text(post.dateTime.toString()),
+                  leading: CircleAvatar(
+                      foregroundImage: NetworkImage(post.photoUrl!)),
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(
+                    post.photoUrl!,
+                    height: 75,
+                    frameBuilder:
+                        (context, child, frame, wasSynchronouslyLoaded) {
+                      return Image.asset("assets/images/wp5097914.jpg");
+                    },
+                    fit: BoxFit.fill,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      return Image.asset(
+                        "assets/images/wp5097914.jpg",
+                        height: 250,
+                        width: MediaQuery.sizeOf(context).width * .8,
+                        fit: BoxFit.fill,
+                      );
+                      // return CircularProgressIndicator();
+                    },
+                  ),
+                ),
+                SizedBox(height: 10,),
+                Text(
+                  post.caption!,
+                ),
+                Row(
+                  children: [
+                    Column(
+                      children: [
+                        IconButton(onPressed: () {}, icon: Icon(Icons.chat)),
+                        // Text(post.likes.toString()),
+                      ],
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
-          Image.network(post.photoUrl),
-          CircleAvatar(),
-          Text(post.caption),
-          Row(
-            children: [
-              Column(
-                children: [
-                  Icon(Icons.thumb_up),
-                  Text(post.likes.toString()),
-                ],
-              )
-            ],
-          )
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

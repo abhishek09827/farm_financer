@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import '../models/post.dart';
+import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 
 import 'package:path/path.dart';
@@ -27,16 +28,41 @@ class PostController {
     }
   }
 
+  Future<String?> uploadDocuments(PlatformFile file) async {
+    if (file == null) return null;
+    print("inside upload 1");
+    final fileName = basename(file.path!);
+    final destination = 'posts/$fileName';
+
+    try {
+      print("inside upload 2");
+      final ref = firebaseStorage.ref(destination).child('');
+      await ref.putFile(File(file.path!));
+      String imageURL = await ref.getDownloadURL();
+      print(imageURL);
+      print("inside upload 3");
+      return imageURL;
+    } catch (e) {
+      print(e.toString());
+      print('error occured');
+    }
+  }
+
   FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
-  addPost(users, CommunityPost post) async {
-    
+  Future<bool> addPost(users, CommunityPost post) async {
     print("indside add data");
     print(users?.uid);
     final doc = await FirebaseFirestore.instance
         .collection('resources')
-        .add(post.toMap());
+        .add(post.toMap())
+        .then((value) {
+      return true;
+    }).onError((error, stackTrace) {
+      return false;
+    });
     print("indside add data2");
+    return true;
     // final snapshot = await doc.get();
     // final docs = snapshot.data();
 

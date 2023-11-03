@@ -1,5 +1,6 @@
 import 'dart:io';
-
+import 'package:farm_financer/screens/resources.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:farm_financer/controllers/post_controller.dart';
 import 'package:farm_financer/models/post.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,6 +16,7 @@ class CreatePostScreen extends StatefulWidget {
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
   User? users = FirebaseAuth.instance.currentUser;
+  FilePickerResult? result;
   @override
   void initState() {
     // TODO: implement initState
@@ -77,7 +79,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 autofocus: false,
                 controller: captionController,
                 textAlign: TextAlign.start,
-                keyboardType: TextInputType.phone,
                 cursorColor: Colors.black,
                 decoration: InputDecoration(
                   fillColor: Colors.black,
@@ -132,21 +133,72 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
             ElevatedButton(
                 onPressed: () async {
                   print("sfdfdf");
-                  String? imageURL = await PostController().uploadFile(image);
-                  if (imageURL == null) {
+                  String? imageURL1 = await PostController().uploadFile(image);
+                  if (imageURL1 == null) {
                     print("could not upload image ");
                     return;
                   }
                   print("sfdfdf");
+
+                  print("sfdfdf");
+                  List<String> docLinks = [];
+                  for (var element in result!.files) {
+                    print(element.name);
+
+                    String? imageURL =
+                        await PostController().uploadDocuments(element);
+                    if (imageURL == null) {
+                      print("could not upload image ");
+                      return;
+                    }
+                    docLinks.add(imageURL);
+                  }
+                  print("sfdfdf");
                   CommunityPost post = CommunityPost(
                       userID: users!.uid!,
-                      photoUrl: imageURL,
+                      photoUrl: imageURL1,
+                      files: docLinks,
                       caption: captionController.text,
                       dateTime: DateTime.now(),
                       likes: 0);
-                  PostController().addPost(users, post);
+                  bool posted = await PostController().addPost(users, post);
+                  if (posted) {
+                    print("POsted");
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => ResourcesPage()),
+                    );
+                  } else
+                    print("try ahain");
                 },
-                child: Text("Post"))
+                child: Text("Post")),
+            Center(
+              child: ElevatedButton(
+                onPressed: () async {
+                  final allFiles = await FilePicker.platform.pickFiles(
+                      type: FileType.custom,
+                      allowedExtensions: ['pdf', 'docx'],
+                      allowMultiple: true);
+                  setState(() {
+                    result = allFiles;
+                  });
+                  if (result == null) {
+                    print("No file selected");
+                  } else {
+                    for (var element in result!.files) {
+                      print(element.name);
+
+                      // PostController().uploadDocuments(element);
+                    }
+                  }
+                },
+                child: const Text("File Picker"),
+              ),
+            ),
+            if (result != null)
+              Column(
+                children: [],
+              )
           ],
         ),
       ),
