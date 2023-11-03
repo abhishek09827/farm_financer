@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../common/primary_button.dart';
+import '../languages.dart';
 import 'login_screen.dart';
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -39,7 +40,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           PrimaryButton(
                             color: Colors.deepOrange,
                             color2: Colors.deepOrange,
-                            title: "Get In",
+                            title: Languages
+                                .of(context)
+                                !.getInName,
                             onPressed: (){
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (context) => SignUpView(),
@@ -48,7 +51,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           PrimaryButton(
                             color: Colors.black38,
                             color2: Colors.black,
-                            title: "I Have An Account",
+                            title: Languages
+                                .of(context)
+                            !.iHaveAccount,
                             onPressed: (){
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (context) => SignInView(),
