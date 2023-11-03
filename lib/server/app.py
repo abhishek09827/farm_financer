@@ -7,7 +7,7 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain.llms import OpenAI
 
 app = Flask(__name__)
-OPENAI_API_KEY="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"
+OPENAI_API_KEY="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"
 
 def pdf_content(pdf_docss):
     text = ""
@@ -28,7 +28,7 @@ def process_pdf(pdf_content):
     chunks = text_splitter.split_text(pdf_content)
 
     # Creating embeddings
-    embeddings = OpenAIEmbeddings(openai_api_key="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")
+    embeddings = OpenAIEmbeddings(openai_api_key="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")
     knowledge_base = FAISS.from_texts(chunks, embeddings)
 
     return knowledge_base
@@ -40,7 +40,7 @@ def ask_pdf_question():
         user_question = request.json.get('question')
 
 
-        pdf_docs = r"C:\\Users\user\StudioProjects\farm_financer\lib\server\corporate bank.pdf"
+        pdf_docs = r"C:\Users\user\StudioProjects\farm_financer\lib\server\corporate bank.pdf"
 
 
         if user_question:
@@ -52,6 +52,7 @@ def ask_pdf_question():
             llm = OpenAI(openai_api_key=OPENAI_API_KEY)
             chain = load_qa_chain(llm, chain_type="stuff")
             response = chain.run(input_documents=docs, question=user_question)
+            print(response)
 
             return jsonify({'response': response})
 

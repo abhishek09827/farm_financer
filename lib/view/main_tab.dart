@@ -8,6 +8,8 @@ import '../../common/color_extension.dart';
 import '../screens/add_subs.dart';
 import '../screens/chat_page.dart';
 import '../screens/home_view.dart';
+import '../widgets/settings.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainTabView extends StatefulWidget {
   int? savings = 0;
@@ -28,6 +30,12 @@ class _MainTabViewState extends State<MainTabView> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
   }
 
+  Future<void> _launchInWebView(Uri url) async {
+    if (!await launchUrl(url, mode: LaunchMode.externalNonBrowserApplication)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget child = HomeView();
@@ -41,6 +49,10 @@ class _MainTabViewState extends State<MainTabView> {
 
       case 2:
         child = ChatPage();
+        break;
+
+      case 3:
+        child = SettingsView();
         break;
     }
     return Scaffold(
@@ -75,10 +87,12 @@ class _MainTabViewState extends State<MainTabView> {
                                 )),
                             IconButton(
                                 onPressed: () {
-                                     Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CommunityPostPage()),
-                );
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            CommunityPostPage()),
+                                  );
                                 },
                                 icon: Icon(
                                   CupertinoIcons.chat_bubble_2_fill,
@@ -90,9 +104,15 @@ class _MainTabViewState extends State<MainTabView> {
                             ),
                             IconButton(
                                 onPressed: () {
-                                  setState(() {
-                                    selectTab = 2;
-                                  });
+                                  // Navigator.push(context, MaterialPageRoute(
+                                  //   builder: (context) => ChatPage(),
+                                  // ));
+
+                                  print("Sd");
+                                  _launchInWebView(Uri(
+                                      host:
+                                          "www.chatbot-kissan.streamlit.app",
+                                      scheme: "https"));
                                 },
                                 icon: Icon(
                                   CupertinoIcons.bubble_middle_bottom_fill,

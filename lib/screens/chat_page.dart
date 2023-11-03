@@ -31,13 +31,14 @@ class _ChatPageState extends State<ChatPage> {
 
   Future<void> _askQuestion(String question) async {
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:5000/chatbot'),
+      Uri.parse('http://192.168.164.238:5000/chatbot'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'question': question}),
     );
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
+      print(data['response']);
       setState(() {
         _response = data['response'] ?? 'No response from server';
       });
@@ -63,7 +64,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
 
-  void _handleSendPressed(types.PartialText message) {
+  void _handleSendPressed(types.PartialText message) async{
     final textMessage = types.TextMessage(
       author: _user,
       createdAt: DateTime.now().millisecondsSinceEpoch,
@@ -72,9 +73,10 @@ class _ChatPageState extends State<ChatPage> {
     );
 
     _addMessage(textMessage);
-    _askQuestion(_questionController.text);
+    await _askQuestion(message.text);
     final textMessage2 = types.TextMessage(
       author: _user2,
+
       createdAt: DateTime.now().millisecondsSinceEpoch,
       id: const Uuid().v4(),
       text: _response,
@@ -87,9 +89,22 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
     body: SafeArea(
-      child: Padding( 
-        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 75),
-        child: Chat(
+      child: Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+      backgroundColor: Colors.deepOrangeAccent,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        ),
+        title: Text("Financer Bot"),
+      ),
+        body: Chat(
+          theme: DefaultChatTheme(
+            backgroundColor: Colors.black
+          ),
           messages: _messages,
           onSendPressed: _handleSendPressed,
           showUserAvatars: true,

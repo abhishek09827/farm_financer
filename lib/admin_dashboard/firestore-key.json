@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "farmfinancer",
+  "private_key_id": "a2917e908fe542f849752cd6864f59b6b382cf3d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC4ZIkZIqDy8Yh1\nrgPyUwKWsj9yMMwwKHOOtzi/9JL1WAiW/OX+D0A9k/J2XiQT52dBUuxT2vy3YBYT\nIDYKsrROfpaN3njMS/Btx+VKkR0TYLC/sPd6t9oLh1qyiBOHPipQKTtrWwrYV9JY\nSH8ozHRoZim9C7VeZSbmZ02tSinPd7Db1DKz9PYvsZNzB/EqsUCmdo2Dg/kuqnwj\nAgyF0KPWoEwUPgLzoqtbglMKmesUy6bgnaYXQQw+gUed+EEaDkH0/59JPhU3yFmS\n9OeJficAxgy0YHKX+qjrreujwKQjcYYOendk+Rmhlgn08WIX/SXLBOeowcWC4wzI\nX3RFFIDvAgMBAAECggEARwV+It7KJFjwqPb6ESt060tDkb2G4COsgrNCmfjfY71h\nLZrCEU2Zfj5OXNYcykfOZwRD/3Zw8UaCqiI1foBfX351ibY/S90SAY7FW6eyDcUn\nvuWwJKXMx7T+M5ajAuvoS1DeUJbUAgktfRCLXdEGIzH6cJSianXGemcerZjLqts0\nOKZlsEf7Xuia35UjdEQjeNU6lNbgN8J0tjJG91ADqr+JYAgHYZAFOFGxGyOYxDRn\nQGCsn/eL2UgcMBbGCAh2D/5n+BV1OfCp/zMkWY8w/V2ezzFbFD7GGGaa2hcKbBLA\nGI3Qgi4MIpGpvbjAJx3hNB1CTtueW9HLRE5q4XNouQKBgQDyQQBJGf9OLoJX94YH\nPlJwC6YHK+RL5qjqv7fzPYNX9eE4ClhyGfSggfxTIxwkRVpw0z3b6Q4IIMyyip52\n4JdfiXp0ICepTOyzl8DJdAxgvxiCtzOPGFfrF1CEW5l9vz1Vlm2Yl22KmxuxytCP\np0MfvuCOeFNebgWygax8fC/vNwKBgQDC2wnNOngpiNq22S40VA1mifEhh1xdx5nq\nbLnxrGPNBhdDdxzmQIRWT2KfDvsSgR3iBqlCwLlIbojaGPRSXhx52FcUkfPmwPqx\nSRW1FJT8VMS0rpn209aKn2nUVn08rnq4/hAIrDQ4i+XrJfhg5WKs9VgPs6eNuMMN\n9ZwfO1+oCQKBgE/ru+FiD0VGuL+2rGP1XpMSdLrG8zFLLo0LpO89avh46M1pNFao\nU3kkiQ8QdTdOHhE8z5qeX3+0+nMoojDL1YSyQVDQTuVeuHRjaznK7E56nOZ69CqQ\nOGkZrvmLkq7WibCTySJfSsdAdrmIFJhf8RgnC8RU1ARCPeTvPO1wtwuvAoGAKPP8\nVWPqiWA4B6IRsfHQdzKauV9HrHYdBUYgtohy2U5kaUuJiWMZ7UH2ClQNtM/qRez8\negkjZ/PDU4NXJlCdT4aGls4uItuAVO51X3+Z6IawaQEhXt0bBDuI9JXQ8IYDSQos\nuIXo29GbWxa54zOSz6MpBPPPTVv9sttiGrZR3nECgYEA8dFK+NHcPB7rS2DXPx/3\nNfqSndxP0fYjxYJuQdTP84qwcoNQXDsn7SvW4au8IzGhpEg1nJdYNKQdihRGpcMq\nONyg/HxNXMIjn8l5dYP/GrAlL440ulPo3SEushGI7wA1x+7XowB+WT2IPAIDt1J3\nv0B5QQbZ9ipgUmAApOOLj5E=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-834ge@farmfinancer.iam.gserviceaccount.com",
+  "client_id": "115841151214652123998",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-834ge%40farmfinancer.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
