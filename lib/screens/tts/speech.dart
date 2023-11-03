@@ -5,8 +5,8 @@ class TTSController {
 
   Future<void> configureTts() async {
     await flutterTts.setLanguage('en-US');
-    await flutterTts.setSpeechRate(1.0);
-    await flutterTts.setVolume(1.0);
+    await flutterTts.setSpeechRate(0.5);
+    await flutterTts.setVolume(0.5);
   }
 
   void speakText(String text) async {

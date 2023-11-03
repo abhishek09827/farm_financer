@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:farm_financer/screens/tts/speech.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
@@ -89,12 +90,23 @@ class _ChatPageState extends State<ChatPage> {
       backgroundColor: Colors.black,
       appBar: AppBar(
       backgroundColor: Colors.deepOrangeAccent,
+
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: (){
             Navigator.pop(context);
           },
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.mic),
+            onPressed: (){
+              var tts = TTSController();
+              tts.speakText(_response);
+            },
+          ),
+        ],
+
         title: Text("Financer Bot"),
       ),
         body: Chat(
@@ -107,6 +119,7 @@ class _ChatPageState extends State<ChatPage> {
           showUserNames: true,
           user: _user,
         ),
+
       ),
     ),
   );
