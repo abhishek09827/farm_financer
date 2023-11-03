@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:farm_financer/screens/community.dart';
 import 'package:farm_financer/screens/resources.dart';
 import 'package:farm_financer/util/constants.dart';
 import 'package:file_picker/file_picker.dart';
@@ -83,10 +84,14 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       : Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                              Icon(Icons.file_upload_outlined,color: AppColor.deepOrangeAccent,),
+                              Icon(
+                                Icons.file_upload_outlined,
+                                color: AppColor.deepOrangeAccent,
+                              ),
                               Text(
                                 "Browse Files",
-                                style: TextStyle(color: AppColor.deepOrangeAccent),
+                                style:
+                                    TextStyle(color: AppColor.deepOrangeAccent),
                               )
                             ]),
                   decoration: BoxDecoration(
@@ -145,7 +150,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ResourcesPage()),
+                                      builder: (context) =>
+                                          CommunityPostPage()),
                                 );
                               } else
                                 print("try ahain");
@@ -273,7 +279,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               //       "Post",
               //       style: TextStyle(color: AppColor.white),
               //     )),
-        
+
               // if (result != null)
               //   Column(
               //     children: [],
