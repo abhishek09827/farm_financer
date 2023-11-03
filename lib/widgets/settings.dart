@@ -39,7 +39,7 @@ class _SettingsViewState extends State<SettingsView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Settings",
+                      "Profile",
                       style: TextStyle(color: TColor.gray30, fontSize: 16),
                     )
                   ],
@@ -62,7 +62,7 @@ class _SettingsViewState extends State<SettingsView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Code For Any",
+                  "Farm Profile",
                   style: TextStyle(
                       color: TColor.white,
                       fontSize: 20,
@@ -73,42 +73,7 @@ class _SettingsViewState extends State<SettingsView> {
             const SizedBox(
               height: 4,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "codeforany@gmail.com",
-                  style: TextStyle(
-                      color: TColor.gray30,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            InkWell(
-              borderRadius: BorderRadius.circular(15),
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: TColor.border.withOpacity(0.15),
-                  ),
-                  color: TColor.gray60.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Text(
-                  "Edit profile",
-                  style: TextStyle(
-                      color: TColor.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-            ),
+
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
               child: Column(
@@ -133,110 +98,20 @@ class _SettingsViewState extends State<SettingsView> {
                       color: TColor.gray60.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(16),
                     ),
-                    child: Column(
+                    child: const Column(
                       children: [
                         IconItemRow(
-                          title: "Security",
+                          title: "Farm Score",
                           icon: "assets/images/settings.png",
-                          value: "FaceID",
-                        ),
-                        IconItemSwitchRow(
-                          title: "iCloud Sync",
-                          icon: "assets/images/settings.png",
-                          value: isActive,
-                          didChange: (newVal) {
-                            setState(() {
-                              isActive = newVal;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20, bottom: 8),
-                    child: Text(
-                      "My subscription",
-                      style: TextStyle(
-                          color: TColor.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: TColor.border.withOpacity(0.1),
-                      ),
-                      color: TColor.gray60.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Column(
-                      children: [
-                        IconItemRow(
-                          title: "Sorting",
-                          icon: "assets/images/settings.png",
-                          value: "Date",
-                        ),
-
-                        IconItemRow(
-                          title: "Summary",
-                          icon: "assets/images/settings.png",
-                          value: "Average",
-                        ),
-
-                        IconItemRow(
-                          title: "Default currency",
-                          icon: "assets/images/settings.png",
-                          value: "USD (\$)",
+                          value: "24.2",
                         ),
 
                       ],
                     ),
                   ),
 
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20, bottom: 8),
-                    child: Text(
-                      "Appearance",
-                      style: TextStyle(
-                          color: TColor.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: TColor.border.withOpacity(0.1),
-                      ),
-                      color: TColor.gray60.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Column(
-                      children: [
-                        IconItemRow(
-                          title: "App icon",
-                          icon: "assets/images/settings.png",
-                          value: "Default",
-                        ),
-                        IconItemRow(
-                          title: "Theme",
-                          icon: "assets/images/settings.png",
-                          value: "Dark",
-                        ),
-                        IconItemRow(
-                          title: "Font",
-                          icon: "assets/images/settings.png",
-                          value: "Inter",
-                        ),
 
-                      ],
-                    ),
-                  ),
+
                 ],
               ),
             )

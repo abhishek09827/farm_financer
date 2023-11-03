@@ -6,6 +6,7 @@ import '../../common/color_extension.dart';
 import '../screens/add_subs.dart';
 import '../screens/chat_page.dart';
 import '../screens/home_view.dart';
+import '../widgets/settings.dart';
 
 
 class MainTabView extends StatefulWidget {
@@ -41,6 +42,10 @@ class _MainTabViewState extends State<MainTabView> {
 
       case 2:
         child = ChatPage();
+        break;
+
+      case 3:
+        child = SettingsView();
         break;
     }
     return Scaffold(
