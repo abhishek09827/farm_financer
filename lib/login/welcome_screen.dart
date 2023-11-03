@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../common/primary_button.dart';
+import '../languages.dart';
 import 'login_screen.dart';
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -15,7 +16,6 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.sizeOf(context);
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -23,8 +23,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: [
             Image.asset(
               "assets/images/wp5097914.jpg",
-              width: media.width,
-              height: media.height,
+              width: MediaQuery.sizeOf(context).width,
+              height: MediaQuery.sizeOf(context).height,
             fit: BoxFit.cover,),
             SafeArea(
                 child: Column(
@@ -32,15 +32,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   children: [
                     Image.asset(
                         "assets/images/farm_logo.png",
-                        width: media.width * 0.5,
-                        height: media.height * 0.5),
+                        width: MediaQuery.sizeOf(context).width * 0.5,
+                        height: MediaQuery.sizeOf(context).height * 0.5),
                     Container(
                       child: Column(
                         children: [
                           PrimaryButton(
                             color: Colors.deepOrange,
                             color2: Colors.deepOrange,
-                            title: "Get In",
+                            title: Languages
+                                .of(context)
+                                !.getInName,
                             onPressed: (){
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (context) => SignUpView(),
@@ -49,7 +51,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           PrimaryButton(
                             color: Colors.black38,
                             color2: Colors.black,
-                            title: "I Have An Account",
+                            title: Languages
+                                .of(context)
+                            !.iHaveAccount,
                             onPressed: (){
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (context) => SignInView(),

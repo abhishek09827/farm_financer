@@ -1,9 +1,11 @@
 import 'package:farm_financer/screens/resources.dart';
+import 'package:farm_financer/screens/chat_bot.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../common/color_extension.dart';
 import '../screens/add_subs.dart';
+import '../screens/chat_page.dart';
 import '../screens/home_view.dart';
 
 class MainTabView extends StatefulWidget {
@@ -30,19 +32,17 @@ class _MainTabViewState extends State<MainTabView> {
     Widget child = HomeView();
     switch (selectTab) {
       case 0:
-        child = HomeView(
-          savings: widget.savings,
-        );
+        child = HomeView();
         break;
       case 1:
         child = ResourcesPage();
         break;
+
       case 2:
-        child = HomeView();
+        child = ChatPage();
         break;
     }
     return Scaffold(
-      backgroundColor: TColor.gray,
       body: Stack(children: [
         child,
         SafeArea(

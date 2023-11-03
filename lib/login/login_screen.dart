@@ -1,3 +1,4 @@
+import 'package:farm_financer/login/sign_up_screen.dart';
 import 'package:farm_financer/screens/home_view.dart';
 import 'package:farm_financer/view/main_tab.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -120,7 +121,13 @@ class _SignInViewState extends State<SignInView> {
                 color: Colors.deepOrangeAccent,
                 color2: Colors.black38,
                 title: "Sign up",
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignUpView()),
+                  );
+
+                },
               ),
             ],
           ),

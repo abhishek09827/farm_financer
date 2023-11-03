@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:farm_financer/screens/budget.dart';
 import 'package:farm_financer/view/main_tab.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -132,6 +133,7 @@ class _HomeViewState extends State<HomeView> {
                           if(snapshot.hasData){
                             final data = snapshot.data;
 
+
                             return data == null ?
                             Text("₹ 0") : Text(
                              "₹ "+ data['savings'].toString(),
@@ -159,7 +161,7 @@ class _HomeViewState extends State<HomeView> {
                       ),
 
                       Text(
-                        "This month bills",
+                        "Your Savings",
                         style: TextStyle(
                             color: TColor.gray40,
                             fontSize: 12,
@@ -169,7 +171,13 @@ class _HomeViewState extends State<HomeView> {
                         height: media.width * 0.07,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                   Analysis()));
+                        },
                         child: Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
@@ -180,7 +188,7 @@ class _HomeViewState extends State<HomeView> {
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Text(
-                            "See your budget",
+                            "Analysis",
                             style: TextStyle(
                                 color: TColor.white,
                                 fontSize: 12,
@@ -196,40 +204,60 @@ class _HomeViewState extends State<HomeView> {
                     child: Column(
                       children: [
                         const Spacer(),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: StatusButton(
-                                title: "Active subs",
-                                value: "12",
-                                statusColor: TColor.secondary,
-                                onPressed: () {},
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            Expanded(
-                              child: StatusButton(
-                                title: "Highest subs",
-                                value: "\$19.99",
-                                statusColor: TColor.primary10,
-                                onPressed: () {},
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            Expanded(
-                              child: StatusButton(
-                                title: "Lowest subs",
-                                value: "\$5.99",
-                                statusColor: TColor.secondaryG,
-                                onPressed: () {},
-                              ),
-                            )
-                          ],
-                        ),
+                      FutureBuilder<Map?>(
+                        future: readData(),
+                        builder: (context,snapshot){
+                          if(snapshot.hasData){
+                            final data = snapshot.data;
+
+
+                            return data !=null ? Row(
+                              children: [
+                                Expanded(
+                                  child: StatusButton(
+                                    title: "Transactions",
+                                    value: data.length.toString(),
+                                    statusColor: TColor.secondary,
+                                    onPressed: () {},
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Expanded(
+                                  child: StatusButton(
+                                    title: "Income",
+                                    value: "1000",
+                                    statusColor: TColor.primary10,
+                                    onPressed: () {},
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Expanded(
+                                  child: StatusButton(
+                                    title: "Expense",
+                                    value: "500 ",
+                                    statusColor: TColor.secondaryG,
+                                    onPressed: () {},
+                                  ),
+                                )
+                              ],
+                            ) : Text(" ");
+
+
+                          }
+
+                          else{
+                            return CircularProgressIndicator();
+                          }
+
+
+                        },
+
+                      ),
+
                       ],
                     ),
                   )
@@ -246,7 +274,7 @@ class _HomeViewState extends State<HomeView> {
                 children: [
                   Expanded(
                     child: SegmentButton(
-                      title: "Your subscription",
+                      title: "Your transactions",
                       isActive: isSubscription,
                       onPressed: () {
                         setState(() {

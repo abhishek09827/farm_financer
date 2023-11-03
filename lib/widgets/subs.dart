@@ -47,7 +47,7 @@ class SubScriptionHomeRow extends StatelessWidget {
                 width: 8,
               ),
               Text(
-                "\$${sObj["amount"]}",
+                "\₹${sObj["amount"]}",
                 style: TextStyle(
                     color: TColor.white,
                     fontSize: 14,

@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_financer/models/expense.dart';
-import 'package:farm_financer/screens/home_view.dart';
 import 'package:farm_financer/view/main_tab.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +7,6 @@ import 'package:velocity_x/velocity_x.dart';
 import '../../common/color_extension.dart';
 import '../common/primary_button.dart';
 import 'package:image_picker/image_picker.dart';
-
-
-
-
 class AddSubs extends StatefulWidget {
   const AddSubs({super.key});
 
@@ -87,8 +80,8 @@ class _AddSubsState extends State<AddSubs> {
                     },
                     child: CircleAvatar(
                       radius: 100,
-                      child: Icon(Icons.account_circle, size: 200,),
-                      backgroundColor: Colors.black,
+                      child: Icon(Icons.print, size: 200,color: Colors.white,),
+                      backgroundColor: Colors.black38,
                     ),
                   ),
                   SizedBox(height: 20,),
@@ -184,11 +177,6 @@ class _AddSubsState extends State<AddSubs> {
     .doc(users?.uid)
         .collection(
     "expense").add(json);
-
-
-
-
-
   }
   }
 
