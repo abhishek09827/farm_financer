@@ -39,167 +39,178 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         centerTitle: true,
       ),
       body: Center(
-        child: Column(
-          children: [
-            GestureDetector(
-              onTap: () async {
-                final pickedFile =
-                    await picker.pickImage(source: ImageSource.gallery);
-                setState(() {
-                  if (pickedFile != null) {
-                    image = File(pickedFile.path);
-                    // uploadFile();
-                  } else {
-                    print('No image selected.');
-                  }
-                });
-                print(image);
-              },
-              child: Container(
-                height: 200,
-                width: 300,
-                child: image != null
-                    ? Image.file(
-                        File(image!.path),
-                        fit: BoxFit.cover,
-                      )
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                            Icon(Icons.file_upload_outlined),
-                            Text("Browse Files")
-                          ]),
-                decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    border: Border.all(color: Colors.black, width: 1),
-                    borderRadius: BorderRadius.circular(12)),
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
+            children: [
+              Row(
+                children: [CircleAvatar(),SizedBox(width: 12,), Text("emma_watson")],
               ),
-            ),
-            TextFormField(
-                autofocus: false,
-                controller: captionController,
-                textAlign: TextAlign.start,
-                cursorColor: Colors.black,
-                decoration: InputDecoration(
-                  fillColor: Colors.black,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(
-                      color: Colors.grey,
-                      width: 1,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(
-                      color: Colors.grey,
-                      width: 1.0,
-                    ),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(
-                      color: Colors.grey,
-                      width: 1,
-                    ),
-                  ),
-                  // prefixIcon: Padding(
-                  //   padding: const EdgeInsets.only(top: 14).r,
-                  //   child: Text(
-                  //     StringCons.rupee,
-                  //     textAlign: TextAlign.center,
-                  //     style: TextStyle(
-                  //         fontFamily: Cons.appTextStyle,
-                  //         color: Colors.appTextColorHeading,
-                  //         fontWeight: FontWeight.w600,
-                  //         fontSize: 14.h),
-                  //   ),
-                  // ),
-                  disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(
-                      color: Colors.grey,
-                      width: 1.0,
-                    ),
-                  ),
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
-                  isDense: true,
+              GestureDetector(
+                onTap: () async {
+                  final pickedFile =
+                      await picker.pickImage(source: ImageSource.gallery);
+                  setState(() {
+                    if (pickedFile != null) {
+                      image = File(pickedFile.path);
+                      // uploadFile();
+                    } else {
+                      print('No image selected.');
+                    }
+                  });
+                  print(image);
+                },
+                child: Container(
+                  height: 300,
+                  width: 300,
+                  child: image != null
+                      ? Image.file(
+                          File(image!.path),
+                          fit: BoxFit.cover,
+                        )
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                              Icon(Icons.file_upload_outlined),
+                              Text("Browse Files")
+                            ]),
+                  decoration: BoxDecoration(
+                      // color: Colors.grey[300],
+                      border: Border.all(color: Colors.black, width: 1),
+                      borderRadius: BorderRadius.circular(12)),
                 ),
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 14)),
-            ElevatedButton(
-                onPressed: () async {
-                  print("sfdfdf");
-                  String? imageURL1 = await PostController().uploadFile(image);
-                  if (imageURL1 == null) {
-                    print("could not upload image ");
-                    return;
-                  }
-                  print("sfdfdf");
-
-                  print("sfdfdf");
-                  List<String> docLinks = [];
-                  for (var element in result!.files) {
-                    print(element.name);
-
-                    String? imageURL =
-                        await PostController().uploadDocuments(element);
-                    if (imageURL == null) {
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                  autofocus: false,
+                  controller: captionController,
+                  textAlign: TextAlign.start,
+                  cursorColor: Colors.black,
+                  decoration: InputDecoration(
+                    fillColor: Colors.black,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 1,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 1.0,
+                      ),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 1,
+                      ),
+                    ),
+                    // prefixIcon: Padding(
+                    //   padding: const EdgeInsets.only(top: 14).r,
+                    //   child: Text(
+                    //     StringCons.rupee,
+                    //     textAlign: TextAlign.center,
+                    //     style: TextStyle(
+                    //         fontFamily: Cons.appTextStyle,
+                    //         color: Colors.appTextColorHeading,
+                    //         fontWeight: FontWeight.w600,
+                    //         fontSize: 14.h),
+                    //   ),
+                    // ),
+                    disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 1.0,
+                      ),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 14, horizontal: 16),
+                    isDense: true,
+                  ),
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14)),
+              ElevatedButton(
+                  onPressed: () async {
+                    print("sfdfdf");
+                    String? imageURL1 =
+                        await PostController().uploadFile(image);
+                    if (imageURL1 == null) {
                       print("could not upload image ");
                       return;
                     }
-                    docLinks.add(imageURL);
-                  }
-                  print("sfdfdf");
-                  CommunityPost post = CommunityPost(
-                      userID: users!.uid!,
-                      photoUrl: imageURL1,
-                      files: docLinks,
-                      caption: captionController.text,
-                      dateTime: DateTime.now(),
-                      likes: 0);
-                  bool posted = await PostController().addPost(users, post);
-                  if (posted) {
-                    print("POsted");
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => ResourcesPage()),
-                    );
-                  } else
-                    print("try ahain");
-                },
-                child: Text("Post")),
-            Center(
-              child: ElevatedButton(
-                onPressed: () async {
-                  final allFiles = await FilePicker.platform.pickFiles(
-                      type: FileType.custom,
-                      allowedExtensions: ['pdf', 'docx'],
-                      allowMultiple: true);
-                  setState(() {
-                    result = allFiles;
-                  });
-                  if (result == null) {
-                    print("No file selected");
-                  } else {
+                    print("sfdfdf");
+
+                    print("sfdfdf");
+                    List<String> docLinks = [];
                     for (var element in result!.files) {
                       print(element.name);
 
-                      // PostController().uploadDocuments(element);
+                      String? imageURL =
+                          await PostController().uploadDocuments(element);
+                      if (imageURL == null) {
+                        print("could not upload image ");
+                        return;
+                      }
+                      docLinks.add(imageURL);
                     }
-                  }
-                },
-                child: const Text("File Picker"),
+                    print("sfdfdf");
+                    CommunityPost post = CommunityPost(
+                        userID: users!.uid!,
+                        photoUrl: imageURL1,
+                        files: docLinks,
+                        caption: captionController.text,
+                        dateTime: DateTime.now(),
+                        likes: 0);
+                    bool posted = await PostController().addPost(users, post);
+                    if (posted) {
+                      print("POsted");
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ResourcesPage()),
+                      );
+                    } else
+                      print("try ahain");
+                  },
+                  child: Text("Post")),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () async {
+                    final allFiles = await FilePicker.platform.pickFiles(
+                        type: FileType.custom,
+                        allowedExtensions: ['pdf', 'docx'],
+                        allowMultiple: true);
+                    setState(() {
+                      result = allFiles;
+                    });
+                    if (result == null) {
+                      print("No file selected");
+                    } else {
+                      for (var element in result!.files) {
+                        print(element.name);
+
+                        // PostController().uploadDocuments(element);
+                      }
+                    }
+                  },
+                  child: const Text("File Picker"),
+                ),
               ),
-            ),
-            if (result != null)
-              Column(
-                children: [],
-              )
-          ],
+              if (result != null)
+                Column(
+                  children: [],
+                )
+            ],
+          ),
         ),
       ),
     );
