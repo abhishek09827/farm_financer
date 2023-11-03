@@ -15,4 +15,8 @@ class AppColor {
   static Color togglebutton = const Color(0xFF00C91E);
   static Color notification = const Color(0xFF4A4A4A);
   static Color balanceleft = const Color(0xFF737373);
+
+  static Color deepOrangeAccent = Color.fromRGBO(255, 110, 64, 1);
+  static Color orangeAccent = Color.fromRGBO(255, 171, 64, 1);
+  static Color black38 = const Color.fromRGBO(0, 0, 0, 0.38);
 }

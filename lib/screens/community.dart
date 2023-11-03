@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_financer/models/post.dart';
 import 'package:farm_financer/models/user_reviews.dart';
 import 'package:farm_financer/screens/create_post.dart';
+import 'package:farm_financer/util/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -66,9 +67,14 @@ class CommunityPostPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Community Post"),
+        backgroundColor: AppColor.deepOrangeAccent,
+        title: Text("Resources"),
         actions: [
           ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: AppColor.deepOrangeAccent, // background
+                onPrimary: AppColor.white, // foreground
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -197,7 +203,9 @@ class PostWidget extends StatelessWidget {
                     },
                   ),
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   post.caption!,
                 ),

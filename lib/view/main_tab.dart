@@ -1,3 +1,4 @@
+import 'package:farm_financer/screens/community.dart';
 import 'package:farm_financer/screens/resources.dart';
 import 'package:farm_financer/screens/chat_bot.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,7 +36,7 @@ class _MainTabViewState extends State<MainTabView> {
         child = HomeView();
         break;
       case 1:
-        child = ResourcesPage();
+        child = CommunityPostPage();
         break;
 
       case 2:
