@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:farm_financer/screens/resources.dart';
+import 'package:farm_financer/util/constants.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:farm_financer/controllers/post_controller.dart';
 import 'package:farm_financer/models/post.dart';
@@ -34,8 +35,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.black,
       appBar: AppBar(
-        title: Text("Community Post"),
+        backgroundColor: AppColor.deepOrangeAccent,
+        title: Text("Add Resource"),
         centerTitle: true,
       ),
       body: Center(
@@ -44,7 +47,16 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           child: Column(
             children: [
               Row(
-                children: [CircleAvatar(),SizedBox(width: 12,), Text("emma_watson")],
+                children: [
+                  CircleAvatar(),
+                  SizedBox(
+                    width: 12,
+                  ),
+                  Text(
+                    "emma_watson",
+                    style: TextStyle(color: AppColor.white),
+                  )
+                ],
               ),
               GestureDetector(
                 onTap: () async {
@@ -71,12 +83,15 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       : Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                              Icon(Icons.file_upload_outlined),
-                              Text("Browse Files")
+                              Icon(Icons.file_upload_outlined,color: AppColor.deepOrangeAccent,),
+                              Text(
+                                "Browse Files",
+                                style: TextStyle(color: AppColor.deepOrangeAccent),
+                              )
                             ]),
                   decoration: BoxDecoration(
                       // color: Colors.grey[300],
-                      border: Border.all(color: Colors.black, width: 1),
+                      border: Border.all(color: Colors.white24, width: 1),
                       borderRadius: BorderRadius.circular(12)),
                 ),
               ),
@@ -90,6 +105,79 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   cursorColor: Colors.black,
                   decoration: InputDecoration(
                     fillColor: Colors.black,
+                    suffixIcon: result != null
+                        ? IconButton(
+                            onPressed: () async {
+                              print("sfdfdf");
+                              String? imageURL1 =
+                                  await PostController().uploadFile(image);
+                              if (imageURL1 == null) {
+                                print("could not upload image ");
+                                return;
+                              }
+                              print("sfdfdf");
+
+                              print("sfdfdf");
+                              List<String> docLinks = [];
+                              for (var element in result!.files) {
+                                print(element.name);
+
+                                String? imageURL = await PostController()
+                                    .uploadDocuments(element);
+                                if (imageURL == null) {
+                                  print("could not upload image ");
+                                  return;
+                                }
+                                docLinks.add(imageURL);
+                              }
+                              print("sfdfdf");
+                              CommunityPost post = CommunityPost(
+                                  userID: users!.uid!,
+                                  photoUrl: imageURL1,
+                                  files: docLinks,
+                                  caption: captionController.text,
+                                  dateTime: DateTime.now(),
+                                  likes: 0);
+                              bool posted =
+                                  await PostController().addPost(users, post);
+                              if (posted) {
+                                print("POsted");
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ResourcesPage()),
+                                );
+                              } else
+                                print("try ahain");
+                            },
+                            icon: Icon(
+                              Icons.send,
+                              color: AppColor.deepOrangeAccent,
+                            ))
+                        : IconButton(
+                            onPressed: () async {
+                              final allFiles = await FilePicker.platform
+                                  .pickFiles(
+                                      type: FileType.custom,
+                                      allowedExtensions: ['pdf', 'docx'],
+                                      allowMultiple: true);
+                              setState(() {
+                                result = allFiles;
+                              });
+                              if (result == null) {
+                                print("No file selected");
+                              } else {
+                                for (var element in result!.files) {
+                                  print(element.name);
+
+                                  // PostController().uploadDocuments(element);
+                                }
+                              }
+                            },
+                            icon: Icon(
+                              Icons.upload,
+                              color: AppColor.deepOrangeAccent,
+                            )),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
                       borderSide: BorderSide(
@@ -135,80 +223,61 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     isDense: true,
                   ),
                   style: TextStyle(
-                      color: Colors.black,
+                      color: AppColor.white,
                       fontWeight: FontWeight.w700,
                       fontSize: 14)),
-              ElevatedButton(
-                  onPressed: () async {
-                    print("sfdfdf");
-                    String? imageURL1 =
-                        await PostController().uploadFile(image);
-                    if (imageURL1 == null) {
-                      print("could not upload image ");
-                      return;
-                    }
-                    print("sfdfdf");
+              // ElevatedButton(
+              //     onPressed: () async {
+              //       print("sfdfdf");
+              //       String? imageURL1 =
+              //           await PostController().uploadFile(image);
+              //       if (imageURL1 == null) {
+              //         print("could not upload image ");
+              //         return;
+              //       }
+              //       print("sfdfdf");
 
-                    print("sfdfdf");
-                    List<String> docLinks = [];
-                    for (var element in result!.files) {
-                      print(element.name);
+              //       print("sfdfdf");
+              //       List<String> docLinks = [];
+              //       for (var element in result!.files) {
+              //         print(element.name);
 
-                      String? imageURL =
-                          await PostController().uploadDocuments(element);
-                      if (imageURL == null) {
-                        print("could not upload image ");
-                        return;
-                      }
-                      docLinks.add(imageURL);
-                    }
-                    print("sfdfdf");
-                    CommunityPost post = CommunityPost(
-                        userID: users!.uid!,
-                        photoUrl: imageURL1,
-                        files: docLinks,
-                        caption: captionController.text,
-                        dateTime: DateTime.now(),
-                        likes: 0);
-                    bool posted = await PostController().addPost(users, post);
-                    if (posted) {
-                      print("POsted");
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ResourcesPage()),
-                      );
-                    } else
-                      print("try ahain");
-                  },
-                  child: Text("Post")),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () async {
-                    final allFiles = await FilePicker.platform.pickFiles(
-                        type: FileType.custom,
-                        allowedExtensions: ['pdf', 'docx'],
-                        allowMultiple: true);
-                    setState(() {
-                      result = allFiles;
-                    });
-                    if (result == null) {
-                      print("No file selected");
-                    } else {
-                      for (var element in result!.files) {
-                        print(element.name);
-
-                        // PostController().uploadDocuments(element);
-                      }
-                    }
-                  },
-                  child: const Text("File Picker"),
-                ),
-              ),
-              if (result != null)
-                Column(
-                  children: [],
-                )
+              //         String? imageURL =
+              //             await PostController().uploadDocuments(element);
+              //         if (imageURL == null) {
+              //           print("could not upload image ");
+              //           return;
+              //         }
+              //         docLinks.add(imageURL);
+              //       }
+              //       print("sfdfdf");
+              //       CommunityPost post = CommunityPost(
+              //           userID: users!.uid!,
+              //           photoUrl: imageURL1,
+              //           files: docLinks,
+              //           caption: captionController.text,
+              //           dateTime: DateTime.now(),
+              //           likes: 0);
+              //       bool posted = await PostController().addPost(users, post);
+              //       if (posted) {
+              //         print("POsted");
+              //         Navigator.pushReplacement(
+              //           context,
+              //           MaterialPageRoute(
+              //               builder: (context) => ResourcesPage()),
+              //         );
+              //       } else
+              //         print("try ahain");
+              //     },
+              //     child: Text(
+              //       "Post",
+              //       style: TextStyle(color: AppColor.white),
+              //     )),
+        
+              // if (result != null)
+              //   Column(
+              //     children: [],
+              //   )
             ],
           ),
         ),

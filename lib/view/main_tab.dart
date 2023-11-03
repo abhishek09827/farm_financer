@@ -75,9 +75,10 @@ class _MainTabViewState extends State<MainTabView> {
                                 )),
                             IconButton(
                                 onPressed: () {
-                                  setState(() {
-                                    selectTab = 1;
-                                  });
+                                     Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CommunityPostPage()),
+                );
                                 },
                                 icon: Icon(
                                   CupertinoIcons.chat_bubble_2_fill,

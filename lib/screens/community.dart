@@ -66,23 +66,32 @@ class CommunityPostPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CreatePostScreen()),
+            );
+          }),
+      backgroundColor: AppColor.black,
       appBar: AppBar(
         backgroundColor: AppColor.deepOrangeAccent,
         title: Text("Resources"),
-        actions: [
-          ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: AppColor.deepOrangeAccent, // background
-                onPrimary: AppColor.white, // foreground
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CreatePostScreen()),
-                );
-              },
-              child: Text("Create Post"))
-        ],
+        // actions: [
+        //   ElevatedButton(
+        //       style: ElevatedButton.styleFrom(
+        //         primary: AppColor.deepOrangeAccent, // background
+        //         onPrimary: AppColor.white, // foreground
+        //       ),
+        //       onPressed: () {
+        //         Navigator.push(
+        //           context,
+        //           MaterialPageRoute(builder: (context) => CreatePostScreen()),
+        //         );
+        //       },
+        //       child: Text("Create Post"))
+        // ],
       ),
       body: FutureBuilder(
           future: fetchResources(),
@@ -109,47 +118,56 @@ class CommunityPostPage extends StatelessWidget {
 //     itemBuilder: (context, index) {
 //       return UserReviewWidget(userReview: listOfUserReviews[index]);
 //     }),
-class UserReviewWidget extends StatelessWidget {
-  const UserReviewWidget({
-    super.key,
-    required this.userReview,
-  });
+// class UserReviewWidget extends StatelessWidget {
+//   const UserReviewWidget({
+//     super.key,
+//     required this.userReview,
+//   });
 
-  final UserReviews userReview;
+//   final UserReviews userReview;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.grey, borderRadius: BorderRadius.circular(12)),
-      height: 200,
-      width: 100,
-      child: Column(
-        children: [
-          ListTile(
-            trailing: Container(
-              child: Text(userReview.stars.toString()),
-            ),
-            title: Text(userReview.username),
-            leading: CircleAvatar(
-                foregroundImage: NetworkImage(userReview.photoURL)),
-          ),
-          Text(userReview.review),
-          Row(
-            children: [
-              Column(
-                children: [
-                  Icon(Icons.thumb_up),
-                  // Text(userReview.likes.toString()),
-                ],
-              )
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       decoration: BoxDecoration(
+//           color: Colors.grey, borderRadius: BorderRadius.circular(12)),
+//       height: 200,
+//       width: 100,
+//       child: Column(
+//         children: [
+//           ListTile(
+//             trailing: Container(
+//               child: Text(
+//                 userReview.stars.toString(),
+//                 style: TextStyle(color: AppColor.white),
+//               ),
+//             ),
+//             title: Text(
+//               userReview.username,
+//               style: TextStyle(color: AppColor.white),
+//             ),
+//             leading: CircleAvatar(
+//                 foregroundImage: NetworkImage(userReview.photoURL)),
+//           ),
+//           Text(
+//             userReview.review,
+//             style: TextStyle(color: AppColor.white),
+//           ),
+//           Row(
+//             children: [
+//               Column(
+//                 children: [
+//                   Icon(Icons.thumb_up, color: AppColor.white),
+//                   // Text(userReview.likes.toString()),
+//                 ],
+//               )
+//             ],
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 class PostWidget extends StatelessWidget {
   const PostWidget({
@@ -169,45 +187,51 @@ class PostWidget extends StatelessWidget {
             height: 400,
             // width: MediaQuery.sizeOf(context).width * 0.75,
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.green),
+                border: Border.all(color: Colors.white10),
                 borderRadius: BorderRadius.circular(12)),
             child: Column(
               children: [
                 ListTile(
                   title: Text(
                     post.username ?? "unknown",
-                    style: TextStyle(color: Colors.red),
+                    style: TextStyle(color: Colors.white),
                   ),
-                  subtitle: Text(post.dateTime.toString()),
+                  subtitle: Text(
+                    post.dateTime.toString(),
+                    style: TextStyle(color: AppColor.white),
+                  ),
                   leading: CircleAvatar(
                       foregroundImage: NetworkImage(post.photoUrl!)),
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.network(
+                Card(
+                  
+                ),
+                Image(
+                  image: NetworkImage(
                     post.photoUrl!,
-                    height: 75,
-                    frameBuilder:
-                        (context, child, frame, wasSynchronouslyLoaded) {
-                      return Image.asset("assets/images/wp5097914.jpg");
-                    },
-                    fit: BoxFit.fill,
-                    loadingBuilder: (context, child, loadingProgress) {
-                      return Image.asset(
-                        "assets/images/wp5097914.jpg",
-                        height: 250,
-                        width: MediaQuery.sizeOf(context).width * .8,
-                        fit: BoxFit.fill,
-                      );
-                      // return CircularProgressIndicator();
-                    },
                   ),
+                  height: 75,
+                  // frameBuilder:
+                  //     (context, child, frame, wasSynchronouslyLoaded) {
+                  //   return Image.asset("assets/images/wp5097914.jpg");
+                  // },
+                  fit: BoxFit.fill,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    // return Image.asset(
+                    //   "assets/images/wp5097914.jpg",
+                    //   height: 250,
+                    //   width: MediaQuery.sizeOf(context).width * .8,
+                    //   fit: BoxFit.fill,
+                    // );
+                    return CircularProgressIndicator();
+                  },
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
                   post.caption!,
+                  style: TextStyle(color: AppColor.white),
                 ),
                 Row(
                   children: [
