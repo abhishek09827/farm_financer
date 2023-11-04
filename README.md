@@ -1,16 +1,33 @@
-# farm_financer
+# Farm Financer - AI-driven personalized financial app
 
-A new Flutter project.
+![FarmPal Logo](app_logo.png)
 
-## Getting Started
+FarmPal is a revolutionary cross-platform mobile application developed using Flutter, specifically crafted for the farming community. It seamlessly integrates real-time financial tracking, access to government schemes, multilingual support, and a standardized resource-sharing platform, empowering farmers and enhancing their financial well-being. It promotes a sustainable and thriving agricultural community.
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- Real-time financial tracking: Track income, expenses, and debts with monthly and yearly overviews.
+- AI-driven personalized financial suggestions: Using LLM and insights derived from user-provided data, optimize farming practices and financial strategies.
+- Resource sharing community: Through farmer forums and resource sharing, our app fosters collaboration and resource exchange. It utilizes the geolocation of the farmer to provide smart resource recommendations.
+- LLM scheme assistance: Our LLM chatbot delivers personalized advice, navigating complex government schemes and banking procedures.
+- Voice-assisted multilingual support: Leveraging GenAI voice model, the app ensures that even farmers who aren't fluent in dominant languages can seamlessly access all its features.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+- [Support and Contact](#support-and-contact)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Installation
+
+### Prerequisites
+- Flutter 2.0 or higher
+- [Add any additional prerequisites specific to your app]
+
+### Clone Repository
+1. Clone the repository to your local machine:
+   ```sh
+   [git clone [https://github.com/yourusername/farmpal.git](https://github.com/abhishek09827/farm_financer/)](https://github.com/abhishek09827/farm_financer/)
+
